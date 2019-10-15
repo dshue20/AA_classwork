@@ -2,7 +2,7 @@ require_relative "polytree_node"
 
 class KnightPathFinder
 
-  attr_reader :root_node
+  attr_reader :root_node, :move_tree
   attr_accessor :considered_positions
 
   def self.valid_moves(pos)
@@ -57,4 +57,4 @@ class KnightPathFinder
 end
 
 kpf = KnightPathFinder.new([0,0])
-kpf.build_move_tree
+p kpf.move_tree[0]
