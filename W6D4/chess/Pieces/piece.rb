@@ -26,16 +26,6 @@ class Piece
         end
     end
 
-    def move_into_check?(end_pos)
-        duped = board.duplicate
-        duped.move_piece(self.pos,end_pos)
-        duped.in_check?(color)
-    end
-
-    def valid_moves
-        moves.select {|move| !move_into_check?(move)}
-    end
-
 end
 
 class NullPiece < Piece

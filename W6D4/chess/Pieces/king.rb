@@ -1,16 +1,16 @@
-require_relative "../slideable"
+require_relative "../stepable"
 require_relative "piece"
 
-class Queen < Piece
-
-    include Slideable
+class King < Piece
     
+    include Stepable
+
     attr_accessor :move_dirs
 
     def initialize(pos,color,board)
         super(pos,color,board)
-        @move_dirs = ["diagonal","h/v"]
-        @symbol = :Q
+        @move_dirs = ["king"]
+        @symbol = :K
     end
 
 end
