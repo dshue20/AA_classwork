@@ -15,8 +15,9 @@ h2 {
     list-style: square inside;
 }
 
-ol {
+ol > :last-child {
   list-style: circle;
+  color: green
 }
 
 header > img {
