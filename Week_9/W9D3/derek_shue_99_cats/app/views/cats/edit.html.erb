@@ -1,0 +1,6 @@
+<ul>
+    <% @cat.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+</ul>
+<%= render 'form', link: cat_url(@cat), to_do: "patch", cat: @cat, submit_value: 'Update'%>
