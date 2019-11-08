@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NinetyNineCats</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <header>
+    <h2><%= flash[:errors] %></h2>
+    <%if current_user %>
+      <h2><%= current_user.user_name.capitalize + ' is currently logged in' %></h2>
+      <%# <a href="<%= new_session_url%>
+      <form action="<%= session_url %>" method="POST">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value ="Log Out">
+      </form>
+    <% else %>
+      <h2>You are logged out</h2>
+      <form action="<%= new_session_url %>" method="GET">
+        <input type="submit" value ="Log In">
+      </form>
+    <% end %>
+  </header>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
