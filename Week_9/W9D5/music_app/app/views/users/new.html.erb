@@ -1,0 +1,14 @@
+<h1>Create a New User </h1>
+<form action="<%= users_url %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label>
+        Email
+        <input type="text" name="user[email]">
+    </label>
+    <label>
+        Password
+        <input type="text" name="user[password]">
+    </label>
+    <input type="submit" value="Submit">
+</form>
+<a href="<%= new_session_url %>">Log In</a>
