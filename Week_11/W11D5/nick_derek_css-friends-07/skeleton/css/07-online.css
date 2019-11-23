@@ -1,0 +1,14 @@
+/* PHASE 7: Online */
+.profile-picture {
+    position: relative;
+}
+
+.online {
+    position: absolute;
+    color: white;
+    background-color: rgb(100, 175, 100);
+    text-transform: uppercase;
+    box-shadow: 0 1px rgba(31, 85, 31, 0.726);
+    transform: rotate(-45deg) translateX(-25%) translateY(65%);
+    padding: 5px 3px;
+}
