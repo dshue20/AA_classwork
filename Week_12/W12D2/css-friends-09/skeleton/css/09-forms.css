@@ -1,0 +1,21 @@
+/* PHASE 9: Forms */
+.content-main {
+    display: flex;
+}
+
+.input{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.thumbnail {
+    width: 50px;
+    height: 60px;
+}
+
+.button{
+  padding: 10px;
+  background-color: green;
+  font-weight: blod;
+  box-shadow: 1px 1px 0 0 green;
+}
