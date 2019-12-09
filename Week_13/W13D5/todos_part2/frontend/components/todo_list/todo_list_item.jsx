@@ -6,11 +6,20 @@ class TodoListItem extends React.Component {
         this.state = {};
     }
 
+    changeTodo(e){
+        e.preventDefault();
+        
+    }
+
     render() {
         return (
-            <li>
-                {this.props.todo.title}
-            </li>
+            <div>
+                <li>
+                    {this.props.todo.title}
+                </li>
+                <button onClick={this.changeTodo}>{this.props.todo.done? "Undo" : "Done"}</button>
+                <button onClick={this.props.removeTodo}>Remove Todo</button>
+            </div>
         )
     }
 }
