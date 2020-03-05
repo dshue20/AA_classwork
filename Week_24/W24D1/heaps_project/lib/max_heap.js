@@ -30,9 +30,9 @@ class MaxHeap {
         this.siftUp(this.array.length-1);
     }
 
-    siftDown(idx){ // idx=3
-        let left = this.getLeftChild(idx); //6
-        let right = this.getRightChild(idx); //7
+    siftDown(idx){ 
+        let left = this.getLeftChild(idx); 
+        let right = this.getRightChild(idx); 
         let max = this.array[left] > this.array[right] || !this.array[right] ? left : right;
         if (!this.array[left]) return;
         if (this.array[idx] < this.array[max]){
@@ -52,6 +52,10 @@ class MaxHeap {
         return max;
     }
 }
+
+var findKthLargest = function(nums, k) {
+    return nums.sort(function(num1, num2){ return num1 - num2 })[nums.length-k];
+};
 
 module.exports = {
     MaxHeap
