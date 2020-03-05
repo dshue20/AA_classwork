@@ -17,12 +17,11 @@ class MaxHeap {
 
     siftUp(idx){
         if (idx === 1) return;
-        if (this.array[idx] > this.array[this.getParent(idx)]){
-            [this.array[idx], this.array[this.getParent(idx)]] = [this.array[this.getParent(idx)], this.array[idx]];
-        } else {
-            return;
-        }
-        this.siftUp(this.getParent(idx));
+        const parentIdx = this.getParent(idx);
+        if (this.array[idx] > this.array[parentIdx]){
+            [this.array[idx], this.array[parentIdx]] = [this.array[parentIdx], this.array[idx]];
+            this.siftUp(parentIdx);
+        };
     }
 
     insert(val){
@@ -31,23 +30,20 @@ class MaxHeap {
     }
 
     siftDown(idx){ 
-        let left = this.getLeftChild(idx); 
-        let right = this.getRightChild(idx); 
-        let max = this.array[left] > this.array[right] || !this.array[right] ? left : right;
-        if (!this.array[left]) return;
+        if (this.getLeftChild(idx) >= this.array.length) return;
+        const leftIdx = this.getLeftChild(idx);
+        const rightIdx = this.getRightChild(idx);
+        const max = this.array[leftIdx] > this.array[rightIdx] || !this.array[rightIdx] ? leftIdx : rightIdx;
         if (this.array[idx] < this.array[max]){
             [this.array[idx], this.array[max]] = [this.array[max], this.array[idx]];
-        } else {
-            return;
+            this.siftDown(max);
         };
-        this.siftDown(max);
     }
 
     deleteMax(){
         if (this.array.length === 1) return null;
-        [this.array[this.array.length-1], this.array[1]] = [this.array[1], this.array[this.array.length-1]];
-        let max = this.array.pop();
-        if (this.array.length === 1) return max;
+        [this.array[1], this.array[this.array.length-1]] = [this.array[this.array.length-1], this.array[1]];
+        const max = this.array.pop();
         this.siftDown(1);
         return max;
     }
