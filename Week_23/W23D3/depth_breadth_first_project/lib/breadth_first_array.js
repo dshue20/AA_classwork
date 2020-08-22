@@ -1,13 +1,14 @@
 function breadthFirstArray(root) {
+    if (!root) return [];
+    let children = [];
     let queue = [root];
-    let arr = [];
-    while (queue.length){
-        let current = queue.shift();
-        arr.push(current.val);
-        if (current.left) queue.push(current.left);
-        if (current.right) queue.push(current.right);
+    while (queue.length > 0){
+        let curr = queue.shift();
+        if (curr.left) queue.push(curr.left);
+        if (curr.right) queue.push(curr.right);
+        children.push(curr.val);
     };
-    return arr;
+    return children;
 }
 
 module.exports = {
