@@ -1,19 +1,22 @@
 function numRegions(graph) {
-    let visited = new Set();
-    let unvisited = Object.keys(graph);
+    const visited = new Set();
+    const next = [];
     let regions = 0;
-    while (unvisited.length){
-        let queue = [unvisited[0]];
-        while (queue.length){
-            node = queue.shift();
-            unvisited = unvisited.filter(val => val != node);
-            visited.add(node);
-            graph[node].forEach(neighbor => {
-                if (!visited.has(neighbor)) queue.push(neighbor)
-            });
-        };
-        regions++;
-    }
+    let idx = 0;
+    const keys = Object.keys(graph);
+    while (visited.size !== keys.length){
+        if (!visited.has(keys[idx])){
+            visited.add(keys[idx]);
+            for (let neighbor of graph[keys[idx]]) if (!visited.has(neighbor)) next.push(neighbor);
+            while (next.length > 0){
+                let curr = next.shift();
+                visited.add(curr);
+                for (let neighbor of graph[curr]) if (!visited.has(neighbor)) next.push(neighbor);
+            };
+            regions += 1;
+        }
+        idx += 1;
+    };
     return regions;
 }
 

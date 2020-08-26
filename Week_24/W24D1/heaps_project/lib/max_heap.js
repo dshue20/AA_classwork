@@ -4,7 +4,7 @@ class MaxHeap {
     }
 
     getParent(idx){
-        return Math.floor(idx/2);
+        return Math.floor(idx/2) / 1.0;
     }
 
     getLeftChild(idx){
@@ -12,38 +12,48 @@ class MaxHeap {
     }
 
     getRightChild(idx){
-        return idx*2+1;
+        return idx*2 + 1;
     }
 
     siftUp(idx){
-        if (idx === 1) return;
-        const parentIdx = this.getParent(idx);
-        if (this.array[idx] > this.array[parentIdx]){
-            [this.array[idx], this.array[parentIdx]] = [this.array[parentIdx], this.array[idx]];
-            this.siftUp(parentIdx);
+        if (idx === 0 || idx === 1) return;
+        const parentVal = this.array[this.getParent(idx)];
+        if (this.array[idx] > parentVal){
+            this.array[this.getParent(idx)] = this.array[idx];
+            this.array[idx] = parentVal;
+            this.siftUp(this.getParent(idx));
         };
     }
 
     insert(val){
         this.array.push(val);
-        this.siftUp(this.array.length-1);
+        const lastIdx = this.array.length - 1;
+        if (this.array[lastIdx] > this.array[this.getParent(lastIdx)]) this.siftUp(lastIdx);
     }
 
-    siftDown(idx){ 
+    siftDown(idx){
         if (this.getLeftChild(idx) >= this.array.length) return;
-        const leftIdx = this.getLeftChild(idx);
-        const rightIdx = this.getRightChild(idx);
-        const max = this.array[leftIdx] > this.array[rightIdx] || !this.array[rightIdx] ? leftIdx : rightIdx;
-        if (this.array[idx] < this.array[max]){
-            [this.array[idx], this.array[max]] = [this.array[max], this.array[idx]];
+
+        let max;
+        if (this.getRightChild(idx) >= this.array.length){
+            max = this.getLeftChild(idx);
+        } else {
+            max = Math.max(this.array[this.getLeftChild(idx)], this.array[this.getRightChild(idx)]) === this.array[this.getLeftChild(idx)] ? this.getLeftChild(idx) : this.getRightChild(idx);
+        };
+        console.log(max, idx, this.array);
+        const curr = this.array[idx];
+        if (curr < this.array[max]){
+            this.array[idx] = this.array[max];
+            this.array[max] = curr;
             this.siftDown(max);
         };
     }
 
     deleteMax(){
         if (this.array.length === 1) return null;
-        [this.array[1], this.array[this.array.length-1]] = [this.array[this.array.length-1], this.array[1]];
-        const max = this.array.pop();
+        if (this.array.length === 2) return this.array.pop();
+        const max = this.array[1];
+        this.array[1] = this.array.pop();
         this.siftDown(1);
         return max;
     }
