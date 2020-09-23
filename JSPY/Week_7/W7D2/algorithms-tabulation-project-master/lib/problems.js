@@ -3,9 +3,9 @@
 // can take from that position in the array. The function should return a
 // boolean indicating if it is possible to travel from the first position of the
 // array to the last position.
-//
+
 // For Example:
-//
+
 // Given [3, 1, 0, 5, 10]
 //   - We begin at first position, 3.
 //   - Since the element is 3 we can take up to 3 steps from this position.
