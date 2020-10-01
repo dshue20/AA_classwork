@@ -1,6 +1,6 @@
 const { expect } = require('chai');
-const { TreeNode } = require('../lib/tree_node.js');
-const { inOrderArray, postOrderArray } = require('../lib/tree_order.js');
+const { TreeNode } = require('../lib/binary_trees/tree_node.js');
+const { inOrderArray, postOrderArray } = require('../lib/binary_trees/tree_order.js');
 
 
 describe('TreeNode', () => {
