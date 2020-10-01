@@ -31,11 +31,36 @@
  */
 
 function friendsOfRecursion(name, adjacencyList, visited, maxDistance, currentDistance) {
-  throw new Error('Replace this error with your implementation.');
+
 }
 
 function friendsOf(adjacencyList, name, distance) {
-  throw new Error('Replace this error with your implementation.');
+  if (!adjacencyList[name]) return undefined;
+
+  const friends = new Set();
+  friends.add(name);
+  let queue = [name];
+
+  while (distance){
+    let toAdd = [];
+
+    while (queue.length){
+      let curr = queue.shift();
+      adjacencyList[curr].forEach(friend => {
+        if (!(friends.has(friend)) && curr !== friend){
+          friends.add(friend);
+          toAdd.push(friend);
+        }
+      })
+    }
+
+    distance -= 1;
+    queue = [...toAdd];
+    toAdd = [];
+  }
+
+  friends.delete(name);
+  return Array.from(friends);
 }
 
 /******************************************************************************
