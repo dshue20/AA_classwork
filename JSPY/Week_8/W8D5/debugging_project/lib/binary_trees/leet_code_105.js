@@ -20,3 +20,13 @@ var buildTree = function(preorder, inorder) {
 
     return root;
 }
+
+// example
+let root = buildTree([3,9,20,15,7], [9,3,15,20,7]);
+
+function inOrderArray(root) {
+    if (!root) return [];
+    return [...inOrderArray(root.left), root.val, ...inOrderArray(root.right)];
+};
+
+console.log(inOrderArray(root)); // should equal [9, 3, 15, 20, 7]
