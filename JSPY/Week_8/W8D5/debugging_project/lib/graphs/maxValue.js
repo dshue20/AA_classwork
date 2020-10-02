@@ -1,9 +1,13 @@
 
 function maxValue(node, visited=new Set()) {
-    if (visited.has(node)) return -Infinity;
+    if (visited.has(node)) return null;
     visited.add(node);
-    let neighborMaxes = node.neighbors.map((neighbor) => maxValue(neighbor, visited));
-    return Math.max(node.val, ...neighborMaxes);
+    let neighborMaxes = [];
+
+    node.neighbors.forEach((neighbor) => 
+        neighborMaxes.push(maxValue(neighbor)));
+
+    return Math.max(neighborMaxes);
 }
 
 // example
@@ -18,3 +22,5 @@ eight.neighbors = [nine];
 nine.neighbors = [seven];
 
 console.log(maxValue(seven)); // should equal 9
+
+module.exports = { maxValue };

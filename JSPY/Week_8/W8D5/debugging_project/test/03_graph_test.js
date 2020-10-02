@@ -4,8 +4,8 @@ const { expect } = chai;
 
 const { GraphNode } = require('../lib/graphs/graph_node');
 const { breadthFirstSearch } = require('../lib/graphs/bfs');
-// const { maxValue } = require('../lib/graphs/max_value');
-// const { numRegions } = require('../lib/graphs/num_regions');
+const { maxValue } = require('../lib/graphs/maxValue');
+const { numRegions } = require('../lib/graphs/numRegions');
 
 describe('GraphNode Algorithms', () => {
     describe('breadthFirstSearch(startingNode, targetVal)', () => {

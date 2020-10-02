@@ -3,7 +3,7 @@ function numRegions(graph) {
     let regions = 0;
     for (key in graph) {
         regions += 1;
-        set.add(...graph[key]);
+        graph[key].forEach(neighbor => set.add(neighbor));
     };
     return regions;
 }
@@ -18,3 +18,5 @@ let graph1 = {
     'e': ['d'],
 };
 console.log(numRegions(graph1)); // should equal 2
+
+module.exports = { numRegions };
