@@ -53,6 +53,7 @@ app.get("/kitten/image", (req, res) => {
         kitten.score = 0;
         kitten.comments = [];
         kitten.src = image.data[0].url;
+        debugger;
         res.json(kitten);
       });
   } catch (e) {
