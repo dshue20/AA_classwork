@@ -1,0 +1,59 @@
+
+.overlay {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    bottom: 0;
+    color: white;
+    display: flex;
+    font-size: 48px;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  
+  .overlay--hidden {
+    display: none;
+  }
+  
+  .overlay--error {
+    background-color: rgba(255, 0, 0, 0.6);
+  }
+
+  .tree-section {
+    box-sizing: border-box;
+    padding: 1em;
+    width: 400px;
+  }
+
+  .tree--nested {
+    grid-column-start: 2;
+    grid-column-end: 5;
+  }
+  
+  .tree-entry {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 12px 20px 1fr auto;
+    padding: .25em 0;
+  }
+  
+  .tree-entry__disclosure {
+    color: grey;
+    font-size: 12px;
+  }
+  
+  .tree-entry__disclosure--closed::before {
+    content: '\25B6';
+  }
+  
+  .tree-entry__disclosure--opened::before {
+    content: '\25BC';
+  }
+  
+  .tree-entry__icon {
+    width: 20px;
+    height: 20px;
+  }
+
