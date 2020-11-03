@@ -33,8 +33,8 @@ p.more {
 /* Write your CSS here. */
 
 * {
-  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
-  background-color: #F5F5F5;
+  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+  background-color: whitesmoke;
   color: #464646;
 }
 
@@ -50,16 +50,13 @@ ul > li {
   list-style: none;
 }
 
-a:hover, a:visited, a:visited > span {
-  color: #800080;
-}
-
-a > span:visited {
-  color: #800080;
-}
-
-a:hover {
+a:hover, span > a:hover {
   font-weight: bold;
+  color: #800080;
+}
+
+a:visited, span > a:visited {
+  color: #800080;
 }
 
 .page-container {
@@ -106,31 +103,29 @@ ul.clfooter > li {
   padding-right: 5px;
 }
 
-h4::before {
+h4.ban::before {
   content: "☮️";
-  padding-right: 10px;
 }
 
-.cal {
-  border-collapse: collapse;
-}
-
-.cal td {
+td {
   border: 1px solid #333;
-  color: rgba(0,0,0,0.5);
-  font-weight: bold;
   text-align: center;
 }
 
-.cal td a {
+ul.leftlinks a {
   color: green;
+  font-weight: bold;
 }
 
-.cal td:hover {
-  background-color: lavender;
+td.past {
+  color: rgba(0, 0, 0, 0.5);
 }
 
-#today a {
+td.today, td.today > a {
   background-color: darkviolet;
   color: white;
+}
+
+td:hover, td > a:hover {
+  background-color: lavender;
 }
