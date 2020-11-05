@@ -1,0 +1,32 @@
+.wgs {
+  display: inline-block;
+  height: 241px;
+  overflow: hidden;
+  position: relative;
+  width: 320px;
+}
+
+.wgs__dirt-pile {
+  bottom: 0px;
+  height: 110px;
+  position: absolute;
+  width: 320px;
+}
+
+.wgs__mole-head {
+  height: 178px;
+  left: 55px;
+  position: absolute;
+  transition: margin-top .25s;
+  width: 188px;
+}
+
+.wgs__mole-head--hidden {
+  margin-top: 241px;
+}
+
+.pf {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
