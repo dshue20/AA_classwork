@@ -23,3 +23,7 @@
 
 
 -- YOUR CODE HERE
+
+SELECT id, title, updated
+FROM recipes
+WHERE LOWER(title) LIKE LOWER($1);
