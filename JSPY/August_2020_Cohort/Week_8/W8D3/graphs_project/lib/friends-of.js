@@ -30,38 +30,21 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
  */
 
-function friendsOfRecursion(name, adjacencyList, visited, maxDistance, currentDistance) {
-
-}
-
-function friendsOf(adjacencyList, name, distance) {
-  if (!adjacencyList[name]) return undefined;
-
-  const friends = new Set();
-  friends.add(name);
-  let queue = [name];
-
-  while (distance){
-    let toAdd = [];
-
-    while (queue.length){
-      let curr = queue.shift();
-      adjacencyList[curr].forEach(friend => {
-        if (!(friends.has(friend)) && curr !== friend){
-          friends.add(friend);
-          toAdd.push(friend);
-        }
-      })
+function friendsOf(adjacencyList, target, distance, currentDistance=0, visited=new Set()) {
+  if (currentDistance > distance) return;
+  // console.log(visited.size, currentDistance, distance, Object.keys(adjacencyList).length);
+  if (target in adjacencyList){
+    visited.add(target);
+    for (let nextFriend of adjacencyList[target]){
+      friendsOf(adjacencyList, nextFriend, distance, currentDistance + 1, visited);
     }
-
-    distance -= 1;
-    queue = [...toAdd];
-    toAdd = [];
+    if (currentDistance === 0) {
+      visited.delete(target);
+      return Array.from(visited);
+    }
   }
-
-  friends.delete(name);
-  return Array.from(friends);
 }
+
 
 /******************************************************************************
 * Do not change code beneath this line.

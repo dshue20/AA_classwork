@@ -1,16 +1,25 @@
-function nodesAtDepth(root, depth){
-  if (depth < 1) return 0;
-  let level = 1;
-  let queue = [root];
-  while (level !== depth){
-    let toAdd = [];
-    while (queue.length){
-      let curr = queue.shift();
-      if (curr.left) toAdd.push(curr.left);
-      if (curr.right) toAdd.push(curr.right);
-    };
-    level += 1;
-    queue.push(...toAdd);
-  };
-  return queue.length;
+
+
+function friendsOfRecursion(target, adjacencyList, visited, maxDistance, currentDistance) {
+  if (currentDistance > maxDistance) return;
+
+  visited.add(target);
+
+  for (let nextFriend of adjacencyList[target]) {
+    if (visited.has(nextFriend)) continue;
+    friendsOfRecursion(nextFriend, adjacencyList, visited, maxDistance, currentDistance + 1);
+  }
+}
+
+
+function friendsOf(adjacencyList, target, distance) {
+  if (target in adjacencyList) {
+    let visited = new Set();
+    
+    friendsOfRecursion(target, adjacencyList, visited, distance, 0)
+
+    
+    visited.delete(target);
+    return Array.from(visited);
+  }
 }

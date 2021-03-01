@@ -163,7 +163,7 @@ describe('friendsOf()', () => {
     });
 
     it ('returns all reachable people for an arbitrarily large distance', function () {
-      this.timeout(10000);
+      // this.timeout(10000);
 
       const target = randomName();
       const distance = randomInteger(10, 15);
