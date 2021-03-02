@@ -1,5 +1,6 @@
 
 const express = require('express');
+const session = require('express-session');
 
 const app = express();
 
@@ -41,15 +42,24 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Home' });
+  res.render('index', {
+    title: 'Home',
+    history: req.session.history,
+  });
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { title: 'About' });
+  res.render('about', {
+    title: 'About',
+    history: req.session.history,
+  });
 });
 
 app.get('/contact', (req, res) => {
-  res.render('contact', { title: 'Contact' });
+  res.render('contact', {
+    title: 'Contact',
+    history: req.session.history,
+  });
 });
 
 const port = 8080;
