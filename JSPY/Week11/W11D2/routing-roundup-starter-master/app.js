@@ -8,6 +8,10 @@ app.get('/', (req, res) => {
   res.send("Hello from Express!");
 });
 
+app.get('/*xyz', (req, res) => {
+  res.send('That\'s all I wrote.');
+});
+
 app.all('*', (req, res) => {
   res.render('phase2', { method: req.method, path: req.path, num: 1 });
 })
