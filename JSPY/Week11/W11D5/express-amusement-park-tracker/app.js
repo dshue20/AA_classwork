@@ -1,7 +1,10 @@
 const express = require('express');
 const morgan = require('morgan')
 const routes = require('./routes.js');
+
 const app = express();
+
+const { environment, port } = require('./config/index.js');
 
 app.set('view engine', 'pug');
 
@@ -15,7 +18,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  if (process.env.NODE_ENV === 'development'){
+  if (environment === 'development'){
     console.error(err);
   }
   next(err);
@@ -35,7 +38,7 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500);
     let message;
     let stack;
-    if (process.env.NODE_ENV !== 'production'){
+    if (environment !== 'production'){
       message = err.message;
       stack = err.stack;
     }
