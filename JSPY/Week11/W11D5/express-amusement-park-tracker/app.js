@@ -1,7 +1,9 @@
 const express = require('express');
 const morgan = require('morgan')
-const routes = require('./routes.js');
 const cookieParser = require('cookie-parser');
+
+const routes = require('./routes.js');
+const parkRoutes = require('./routes/park-routes');
 
 const app = express();
 
@@ -14,6 +16,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(routes);
+app.use(parkRoutes);
 
 app.use((req, res, next) => {
   const err = new Error("The requested page could not be found");
