@@ -13,10 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    riderPerVehicle: DataTypes.INTEGER,
-    visitedOn: DataTypes.DATEONLY,
-    rating: DataTypes.INTEGER,
-    comments: DataTypes.TEXT
+    ridersPerVehicle: DataTypes.INTEGER,
   }, {});
   Attraction.associate = function(models) {
     Attraction.belongsTo(models.Park, {

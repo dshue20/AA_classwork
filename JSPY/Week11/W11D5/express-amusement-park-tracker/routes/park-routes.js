@@ -10,18 +10,24 @@ const asyncHandler = handler => (req, res, next) => handler(req, res, next).catc
 
 router.get('/parks', asyncHandler(async (req, res) => {
   const parks = await db.Park.findAll({ order: [['parkName', 'ASC']] });
-  res.render('park-list', { title: "Parks", parks });
+  res.render('park/park-list', { title: "Parks", parks });
 }));
 
 router.get('/park/:id(\\d+)', asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id);
-  const park = await db.Park.findByPk(id);
-  res.render('park-detail', { title: "Park Detail", park});
+  const park = await db.Park.findByPk(id, {
+    include: {
+      model: db.Attraction,
+      as: 'attractions'
+    }
+  });
+  console.log(park.attractions);
+  res.render('park/park-detail', { title: "Park Detail", park});
 }));
 
 router.get('/park/add', csrfProtection, (req, res) => {
   const park = db.Park.build();
-  res.render('park-add', { title: "Add Park", park, csrfToken: req.csrfToken() });
+  res.render('park/park-add', { title: "Add Park", park, csrfToken: req.csrfToken() });
 });
 
 const parkValidators = [
@@ -70,14 +76,14 @@ router.post('/park/add', csrfProtection, parkValidators, asyncHandler(async (req
     res.redirect('/');
   } else {
     const errors = validatorErrors.array().map(e => e.msg);
-    res.render('park-add', { title: "Add Park", park, errors, csrfToken: req.csrfToken() });
+    res.render('park/park-add', { title: "Add Park", park, errors, csrfToken: req.csrfToken() });
   }
 }));
 
 router.get('/park/edit/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id);
   const park = await db.Park.findByPk(id);
-  res.render('park-edit', { title: "Edit Park", park, csrfToken: req.csrfToken() });
+  res.render('park/park-edit', { title: "Edit Park", park, csrfToken: req.csrfToken() });
 }));
 
 router.post('/park/edit/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
@@ -96,14 +102,14 @@ router.post('/park/edit/:id(\\d+)', csrfProtection, asyncHandler(async (req, res
   } else {
     const errors = validatorErrors.array().map(e => e.msg);
     park.id = id;
-    res.render('park-edit', { title: 'Edit Park', park, errors, csrfToken: req.csrfToken() });
+    res.render('park/park-edit', { title: 'Edit Park', park, errors, csrfToken: req.csrfToken() });
   }
 }));
 
 router.get('/park/delete/:id(\\d+)', csrfProtection, asyncHandler(async(req, res) => {
   const id = parseInt(req.params.id);
   const park = await db.Park.findByPk(id);
-  res.render('park-delete', { title: 'Delete Park', park, csrfToken: req.csrfToken() });
+  res.render('park/park-delete', { title: 'Delete Park', park, csrfToken: req.csrfToken() });
 }));
 
 router.post('/park/delete/:id(\\d+)', csrfProtection, asyncHandler(async(req, res) => {

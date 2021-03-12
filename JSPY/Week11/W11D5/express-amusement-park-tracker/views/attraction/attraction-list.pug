@@ -1,0 +1,14 @@
+h4 Attractions 
+  if park.attractions
+    table 
+      thead 
+        tr
+          th(scope='col') Attraction Name 
+          th(scope='col') Theme 
+          th(scope='col') Opened 
+      tbody 
+        each attraction in park.attractions 
+          tr 
+            td= attraction.attractionName
+            td= attraction.theme 
+            td= attraction.opened

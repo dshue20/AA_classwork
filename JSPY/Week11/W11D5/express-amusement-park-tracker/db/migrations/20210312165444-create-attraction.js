@@ -28,7 +28,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATEONLY
       },
-      riderPerVehicle: {
+      ridersPerVehicle: {
         type: Sequelize.INTEGER
       },
       visitedOn: {

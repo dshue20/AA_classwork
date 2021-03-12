@@ -1,4 +1,4 @@
-extends layout.pug 
+extends ../layout.pug 
 
 block content 
   h3= park.parkName 
@@ -9,6 +9,7 @@ block content
       li= park.size
   div 
     p= park.description 
+  include ../attraction/attraction-list.pug
   div 
     a(href=`/park/edit/${park.id}`) Edit 
     a(href=`/park/delete/${park.id}`) Delete 
