@@ -4,7 +4,7 @@ include utils.pug
 block content 
   if errors 
     +errorsField(errors)
-  form(action='/park/add', method='POST')
+  form(action=`/park/edit/${park.id}`, method='POST')
     include park-form-fields.pug 
-    button(type='submit') Add Park
+    button(type='submit') Edit Park
     a(href='/') Cancel
