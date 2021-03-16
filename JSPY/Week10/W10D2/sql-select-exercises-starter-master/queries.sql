@@ -32,6 +32,9 @@
 
 -- your query here
 
+SELECT city, state, population_estimate_2018
+FROM cities;
+
 \echo ========= Problem 2.2 ====================================================
 \echo
 /*
@@ -40,6 +43,9 @@
 */
 
 -- your query here
+
+SELECT name
+FROM airports;
 
 ---- Phase 3: Add WHERE clauses ------------------------------------------------
 -- Select specific rows from a table using WHERE and common operators.
@@ -53,6 +59,10 @@
 
 -- your query here
 
+SELECT population_estimate_2018
+FROM cities
+WHERE cities.city = 'San Diego';
+
 \echo ========= Problem 3.2 ====================================================
 \echo
 /*
@@ -62,6 +72,10 @@
 */
 
  -- your query here
+
+ SELECT city, state, population_estimate_2018
+ FROM cities
+ WHERE city in ('Phoenix', 'Jacksonville', 'Charlotte', 'Nashville');
 
 \echo ========= Problem 3.3 ====================================================
 \echo
@@ -73,6 +87,10 @@
 
 -- your query here
 
+SELECT city, state, population_estimate_2018
+FROM cities
+WHERE population_estimate_2018 BETWEEN 800000 AND 900000;
+
 \echo ========= Problem 3.4 ====================================================
 \echo
 /*
@@ -82,6 +100,10 @@
 */
 
 -- your query here
+
+SELECT city
+FROM cities
+WHERE population_estimate_2018 > 1000000;
 
 \echo ========= Problem 3.5 ====================================================
 \echo
@@ -93,18 +115,23 @@
 
 -- your query here
 
+SELECT city, population_estimate_2018 / 1000000.0
+FROM cities
+WHERE state = 'Texas';
+
 \echo ========= Problem 3.6 ====================================================
 \echo
 /*
-3.6) Write a SQL query to get the city and estimated population in 2018 in
-     number of millions (i.e. without zeroes at the end: 1 million), and that
-     uses a WHERE clause to return only the cities in Texas. Write a SQL query
-     that uses a WHERE clause to get the city, state, and estimated population
-     in 2018 of cities that are NOT in the following states:
+3.6) Write a SQL query that uses a WHERE clause to get the city, state, and 
+     estimated population in 2018 of cities that are NOT in the following states:
      New York, California, Texas.
 */
 
 -- your query here
+
+SELECT city, state, population_estimate_2018
+FROM cities
+WHERE state NOT IN ('New York', 'California', 'Texas');
 
 \echo ========= Problem 3.7 ====================================================
 \echo
@@ -117,6 +144,10 @@
 
 -- your query here
 
+SELECT city, state, population_estimate_2018
+FROM cities
+WHERE city LIKE 'S%';
+
 \echo ========= Problem 3.8 ====================================================
 \echo
 /*
@@ -127,6 +158,10 @@
 */
 
 -- your query here
+
+SELECT city, land_area_sq_mi_2016, population_estimate_2018
+FROM cities
+WHERE land_area_sq_mi_2016 > 400 OR population_estimate_2018 > 2000000;
 
 \echo ========= Problem 3.9 ====================================================
 \echo
@@ -139,6 +174,14 @@
 
 -- your query here
 
+SELECT city, land_area_sq_mi_2016, population_estimate_2018
+FROM cities
+WHERE (
+  (land_area_sq_mi_2016 > 400 OR population_estimate_2018 > 2000000)
+  AND NOT
+  (land_area_sq_mi_2016 > 400 AND population_estimate_2018 > 2000000)
+);
+
 \echo ========= Problem 3.10 ===================================================
 \echo
 /*
@@ -149,6 +192,10 @@
 */
 
 -- your query here
+
+SELECT city, population_estimate_2018, population_census_2010
+FROM cities
+WHERE population_census_2010 + 200000 < population_estimate_2018;
 
 ---- Phase 4: Use a JOIN operation ---------------------------------------------
 -- Retrieve rows from multiple tables joining on a foreign key.
@@ -165,6 +212,10 @@
 
 -- your query here
 
+SELECT cities.city, airports.name
+FROM cities
+JOIN airports ON cities.id = airports.city_id;
+
 \echo ========= Problem 4.2 ====================================================
 \echo
 /*
@@ -176,6 +227,11 @@
 */
 
 -- your query here
+
+SELECT COUNT(airports.name)
+FROM airports
+INNER JOIN cities ON cities.id = airports.city_id
+WHERE cities.city = 'New York';
 
 --------------------------------------------------------------------------------
 ---- Bonuses:
@@ -195,6 +251,10 @@ B.1) Apostrophe: Write a SQL query to get all three ID codes (the Federal
 
 -- your query here
 
+SELECT FAA_id, IATA_id, ICAO_id
+FROM airports
+WHERE name = 'Chicago O''Hare International Airport';
+
 \echo ========= Problem B.2 ====================================================
 \echo
 /*
@@ -207,6 +267,9 @@ B.2) Formatting Commas: Refactor Phase 2, Query #1 to turn the INT for estimated
 */
 
 -- your query here
+
+SELECT city, state, to_char(population_estimate_2018, '9,999,999')
+FROM cities;
 
 \echo ========= Problem B.3 ====================================================
 \echo
@@ -223,6 +286,10 @@ B.3) Decimals and Rounding: Refactor Phase 3, Query #5 to turn number of
 */
 
 -- your query here
+
+SELECT city, round(population_estimate_2018 / 1000000.0, 2)
+FROM cities
+WHERE state = 'Texas';
 
 \echo ========= Problem B.4 ====================================================
 \echo
@@ -242,5 +309,10 @@ B.4) ORDER BY and LIMIT Clauses: Refactor Phase 3, Query #10 to return only one
 */
 
 -- your query here
+
+SELECT city, population_estimate_2018, population_census_2010
+FROM cities
+ORDER BY population_estimate_2018 - population_census_2010 DESC
+LIMIT 1;
 
 \echo ========= (done!) ========================================================
