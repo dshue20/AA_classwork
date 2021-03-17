@@ -1,4 +1,4 @@
-const { Op, Model } = require('sequelize');
+const { Op } = require('sequelize');
 let Recipe, Instruction, Ingredient, MeasurementUnit;
 let moduleError;
 
@@ -34,10 +34,6 @@ async function getTenNewestRecipes() {
   // });
   //
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll
-  return await Recipe.findAll({
-    order: [['updatedAt', 'DESC']],
-    limit: 10
-  });
 }
 
 async function getRecipeById(id) {
@@ -75,16 +71,6 @@ async function getRecipeById(id) {
   // Here are links to the wholly-inadequate docs for this.
   // Docs: https://sequelize.org/v5/manual/models-usage.html#eager-loading
   //       https://sequelize.org/v5/manual/models-usage.html#nested-eager-loading
-  
-  return await Recipe.findByPk(id, {
-    include: [
-      Instruction,
-      {
-        model: Ingredient,
-        include: [MeasurementUnit]
-      }
-    ]
-  });
 }
 
 async function deleteRecipe(id) {
@@ -93,9 +79,6 @@ async function deleteRecipe(id) {
   // saw in the video.
   //
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-destroy
-  return await Recipe.destroy({
-    where: { id }
-  });
 }
 
 async function createNewRecipe(title) {
@@ -103,7 +86,6 @@ async function createNewRecipe(title) {
   // return it.
   //
   // Docs: https://sequelize.org/v5/manual/instances.html#creating-persistent-instances
-  return await Recipe.create({title});
 }
 
 async function searchRecipes(term) {
@@ -111,11 +93,6 @@ async function searchRecipes(term) {
   // given term in its title
   //
   // Docs: https://sequelize.org/v5/manual/querying.html
-  return await Recipe.findAll({
-    where: {
-      title: { [Op.like]: term }
-    }
-  });
 }
 
 
