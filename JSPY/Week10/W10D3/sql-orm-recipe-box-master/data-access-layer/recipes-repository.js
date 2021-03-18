@@ -32,6 +32,7 @@ async function getTenNewestRecipes() {
   // Model.findAll({
   //     { ... specify your options here... }
   // });
+  return await Recipe.findAll({ limit: 10 });
   //
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll
 }
@@ -54,6 +55,15 @@ async function getRecipeById(id) {
   //     }
   //   ]
   // });
+    return await Recipe.findByPk(id, {
+      include: [
+        Instruction,
+        {
+          model: Ingredient,
+          include: MeasurementUnit
+        }
+      ]
+    })
   //
   // Look at the data model in the instructions to see the relations between the
   // Recipe table and the Ingredients and Instructions table. Figure out which
@@ -77,21 +87,32 @@ async function deleteRecipe(id) {
   // Use the findByPk method of the Recipe object to get the object and, then,
   // destroy it. Or, use the Model.destroy({ ... where ... }) method that you
   // saw in the video.
-  //
+
+  const recipe = await Recipe.findByPk(id);
+  await recipe.destroy();
+
+  // await Recipe.destroy({ where: {id: id} });
+  
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-destroy
 }
 
 async function createNewRecipe(title) {
   // Use the create method of the Recipe object to create a new object and
   // return it.
-  //
+  return await Recipe.create({ title });
   // Docs: https://sequelize.org/v5/manual/instances.html#creating-persistent-instances
 }
 
 async function searchRecipes(term) {
   // Use the findAll method of the Recipe object to search for recipes with the
   // given term in its title
-  //
+  return await Recipe.findAll({
+    where: {
+      title: {
+        [Op.like]: term
+      }
+    }
+  })
   // Docs: https://sequelize.org/v5/manual/querying.html
 }
 
