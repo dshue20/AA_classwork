@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Document
+  body 
+    form(method='post' action='/new-person')
+      input(type='hidden' name='_csrf' value=csrfToken)
+      input(type='text' name='firstName' required)
+      input(type='text' name='lastName' required)
+      input(type='number' name='age')
+      textarea(name='biography')
+      select(name='hairColorId' required)
+        each color in hairColors 
+          option(value=color.id)= color.color
+      button(type='submit') Submit
