@@ -1,0 +1,21 @@
+form(method='post' action=route)
+  input(type='hidden' name='_csrf' value=csrfToken)
+  input(type='text' name='firstName' value=firstName)
+  input(type='text' name='lastName' value=lastName)
+  input(type='email' name='email' value=email)
+  input(type='password' name='password')
+  input(type='password' name='confirmedPassword')
+
+  if route == '/create-interesting'
+    input(type='number' name='age' value=age)
+    select(name='favoriteBeatle')
+      option(value='') --Please choose an option--
+      option(value='John' selected=(favoriteBeatle == 'John')) John
+      option(value='Paul' selected=(favoriteBeatle == 'Paul')) Paul
+      option(value='Ringo' selected=(favoriteBeatle == 'Ringo')) Ringo
+      option(value='George' selected=(favoriteBeatle == 'George')) George
+      option(value='Scooby-Doo') Scooby-Doo
+    input(type='checkbox' name='iceCream' checked=(iceCream == 'on'))
+    input(type='submit' value='Create Interesting User')
+  else
+    input(type='submit' value='Create User')
